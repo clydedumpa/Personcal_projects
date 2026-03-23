@@ -18,6 +18,16 @@ export type ExperienceEntry = {
   highlights: string[];
 };
 
+export type PortfolioEntry = {
+  title: string;
+  format: string;
+  status: string;
+  summary: string;
+  highlights: string[];
+  href?: string;
+  hrefLabel?: string;
+};
+
 export type ProfileSiteModel = {
   name: string;
   title: string;
@@ -35,6 +45,7 @@ export type ProfileSiteModel = {
   }>;
   categories: HighlightCategory[];
   experience: ExperienceEntry[];
+  portfolio: PortfolioEntry[];
   certifications: string[];
   education: string[];
   languages: string[];
@@ -233,6 +244,34 @@ export const profile: ProfileSiteModel = {
       highlights: [
         "Recommended upgrades that improved machine performance",
         "Contributed to stronger Dell product advocacy through positive support experiences",
+      ],
+    },
+  ],
+  portfolio: [
+    {
+      title: "Clyde Dumpa Portfolio Site",
+      format: "Featured build",
+      status: "Live portfolio foundation",
+      summary:
+        "A Next.js portfolio experience built to present Clyde's consulting story, career arc, and a resume-grounded digital twin chat in one place.",
+      highlights: [
+        "Single-page experience with strong section navigation and responsive design",
+        "OpenRouter-backed chat route tuned to the profile and work history",
+        "Structured content model so future portfolio pieces can be added without redesigning the page",
+      ],
+      href: "https://github.com/clydedumpa/Personcal_projects",
+      hrefLabel: "View source",
+    },
+    {
+      title: "Future Case Study Slot",
+      format: "Ready for upload",
+      status: "Add your next project here",
+      summary:
+        "This placeholder keeps a visible portfolio lane on the site so new projects, screenshots, links, or client-safe case studies can be added as they are ready.",
+      highlights: [
+        "Swap in a project title, short summary, and real delivery outcomes",
+        "Add repository, live demo, or write-up links when you have them",
+        "Use the same card shape for each new portfolio entry to keep updates simple",
       ],
     },
   ],

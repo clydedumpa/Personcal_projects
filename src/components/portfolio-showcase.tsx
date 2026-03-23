@@ -132,6 +132,7 @@ export function PortfolioShowcase({
 
           <nav aria-label="Section navigation" className={styles.navLinks}>
             <a href="#operating-modes">Modes</a>
+            <a href="#portfolio-work">Portfolio</a>
             <a href="#career-arc">Career</a>
             <a href="#credibility-stack">Credentials</a>
             <a href="#digital-twin">Chat</a>
@@ -312,6 +313,55 @@ export function PortfolioShowcase({
                   >
                     Focus this lane
                   </button>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.section} id="portfolio-work">
+          <div className={styles.sectionCard}>
+            <div className={styles.sectionHeader}>
+              <div>
+                <h2 className={styles.sectionTitle}>Portfolio</h2>
+                <p className={styles.sectionIntro}>
+                  A dedicated lane for featured work. The first card anchors the
+                  current site, and the structure is ready for future projects,
+                  demos, and case studies as they are published.
+                </p>
+              </div>
+            </div>
+
+            <div className={styles.portfolioGrid}>
+              {profile.portfolio.map((entry) => (
+                <article className={styles.portfolioCard} key={entry.title}>
+                  <div className={styles.portfolioMeta}>
+                    <span className={styles.portfolioPill}>{entry.format}</span>
+                    <span className={styles.portfolioPill}>{entry.status}</span>
+                  </div>
+                  <h3 className={styles.portfolioTitle}>{entry.title}</h3>
+                  <p className={styles.portfolioSummary}>{entry.summary}</p>
+                  <div className={styles.portfolioHighlights}>
+                    {entry.highlights.map((highlight) => (
+                      <p key={highlight}>{highlight}</p>
+                    ))}
+                  </div>
+
+                  {entry.href ? (
+                    <a
+                      className={styles.cardAction}
+                      href={entry.href}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      {entry.hrefLabel ?? "Open project"}
+                    </a>
+                  ) : (
+                    <p className={styles.portfolioNote}>
+                      Add a live link or repository later by updating the
+                      portfolio data.
+                    </p>
+                  )}
                 </article>
               ))}
             </div>

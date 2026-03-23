@@ -30,6 +30,16 @@ describe("PortfolioShowcase", () => {
     ).toBeInTheDocument();
   });
 
+  it("renders the portfolio section with future-ready entries", () => {
+    render(<PortfolioShowcase profile={profile} />);
+
+    expect(
+      screen.getAllByRole("link", { name: /^portfolio$/i })[0],
+    ).toHaveAttribute("href", "#portfolio-work");
+    expect(screen.getAllByRole("heading", { name: /^portfolio$/i })[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/future case study slot/i)[0]).toBeInTheDocument();
+  });
+
   it("sends a chat prompt and renders the reply", async () => {
     const fetchMock = vi.fn(async () => {
       return {

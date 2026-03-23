@@ -27,5 +27,13 @@ Recommended host: Vercel
 3. If the repo contains the parent `site/` folder, set the Vercel Root Directory to `site/frontend`.
 4. Add `OPENROUTER_API_KEY` in the Vercel project environment settings.
 5. Deploy.
+
+## Updating portfolio items
+
+Portfolio cards are data-driven in `src/content/profile.ts`.
+
+1. Update the `portfolio` array with a title, summary, highlights, and optional link.
+2. Commit and push to `main`.
+3. If Vercel is connected, the site redeploys automatically.
 # My_projects
 # My_projects

@@ -70,3 +70,10 @@
 
 - Started the production server with `npm run start`
 - Final local URL: `http://127.0.0.1:3000`
+
+## 11. Portfolio expansion update
+
+- Added a `Portfolio` tab to the sticky top navigation.
+- Added a dedicated portfolio section in [src/components/portfolio-showcase.tsx](/Users/clyde.dumpa/Documents/Projects/site/frontend/src/components/portfolio-showcase.tsx).
+- Made portfolio entries data-driven in [src/content/profile.ts](/Users/clyde.dumpa/Documents/Projects/site/frontend/src/content/profile.ts) so future work can be added without changing layout code.
+- Documented the update path in [README.md](/Users/clyde.dumpa/Documents/Projects/site/frontend/README.md).

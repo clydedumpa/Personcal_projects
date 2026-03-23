@@ -14,11 +14,12 @@ test("renders the portfolio and chat surface", async ({ page }) => {
   await page.goto("/");
 
   await expect(
-    page.getByRole("heading", { name: "Clyde Dumpa" }),
+    page.getByRole("heading", { name: /^Clyde Dumpa$/ }),
   ).toBeVisible();
   await expect(
-    page.getByRole("heading", { name: "Operating modes" }),
+    page.getByRole("heading", { name: /^Operating modes$/ }),
   ).toBeVisible();
+  await expect(page.getByRole("heading", { name: /^Portfolio$/ })).toBeVisible();
 
   await page.getByRole("button", { name: /application support/i }).click();
   await expect(
