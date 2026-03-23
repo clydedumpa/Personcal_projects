@@ -27,3 +27,4 @@ Recommended host: Vercel
 3. If the repo contains the parent `site/` folder, set the Vercel Root Directory to `site/frontend`.
 4. Add `OPENROUTER_API_KEY` in the Vercel project environment settings.
 5. Deploy.
+# My_projects
