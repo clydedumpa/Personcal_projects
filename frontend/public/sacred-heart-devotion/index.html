@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sacred Heart Devotion</title>
+<style>
+:root {
+  --bg: #fbf7ef;
+  --paper: #fffdf8;
+  --ink: #2b211d;
+  --muted: #6c5b52;
+  --red: #8b1f1f;
+  --red-dark: #5f1212;
+  --gold: #c89b3c;
+  --line: #e4d6c2;
+  --shadow: 0 18px 45px rgba(67, 39, 20, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, rgba(139, 31, 31, 0.08), rgba(251, 247, 239, 0) 260px),
+    var(--bg);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+main {
+  width: min(100%, 980px);
+  margin: 0 auto;
+  padding: 28px 18px 56px;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  color: var(--red-dark);
+}
+
+h1 {
+  margin: 0 0 10px;
+  font-size: clamp(2.1rem, 6vw, 4.4rem);
+  letter-spacing: 0;
+}
+
+h2 {
+  margin: 0 0 16px;
+  font-size: clamp(1.45rem, 4vw, 2rem);
+}
+
+h3 {
+  margin: 28px 0 8px;
+  font-size: 1.16rem;
+}
+
+p {
+  margin: 0 0 16px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
+  gap: 28px;
+  align-items: center;
+  min-height: min(720px, calc(100vh - 56px));
+  padding-bottom: 28px;
+}
+
+.hero-copy {
+  max-width: 580px;
+}
+
+.subtitle {
+  max-width: 44rem;
+  margin-bottom: 22px;
+  color: var(--muted);
+  font-size: 1.08rem;
+}
+
+.hero-image {
+  margin: 0;
+}
+
+.hero-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(200, 155, 60, 0.6);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.hero-image figcaption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 1px solid var(--red);
+  border-radius: 6px;
+  color: #fff;
+  background: var(--red);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.button.secondary {
+  color: var(--red-dark);
+  background: transparent;
+}
+
+.button:hover {
+  border-color: var(--red-dark);
+  background: var(--red-dark);
+}
+
+.button.secondary:hover {
+  color: #fff;
+}
+
+.button:focus-visible,
+.reset:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(200, 155, 60, 0.75);
+  outline-offset: 3px;
+}
+
+.section {
+  margin: 0 0 28px;
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  box-shadow: 0 8px 24px rgba(67, 39, 20, 0.06);
+}
+
+.section-header {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.section-header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.checklist {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.check-item {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fffaf0;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.check-item input {
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  accent-color: var(--red);
+}
+
+.check-item span {
+  min-width: 0;
+}
+
+.check-item:hover,
+.month-card:hover {
+  border-color: rgba(139, 31, 31, 0.28);
+  background: #fffdf8;
+}
+
+.tracker {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.month-card {
+  min-width: 0;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fffaf0;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.month-card legend {
+  padding: 0 6px;
+  color: var(--red-dark);
+  font-weight: 700;
+}
+
+.month-date {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 0.93rem;
+}
+
+.month-field {
+  display: block;
+  width: min(100%, 12rem);
+  min-width: 7rem;
+  margin-top: 6px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  background: transparent;
+  font: inherit;
+  font-size: 0.92rem;
+}
+
+.commitments {
+  display: grid;
+  gap: 8px;
+}
+
+.commitment {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 8px;
+  align-items: start;
+  min-width: 0;
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.commitment input {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--red);
+}
+
+.prayer {
+  padding: 2px 0 0;
+}
+
+.prayer p {
+  max-width: 68ch;
+}
+
+.prayer-text {
+  max-width: 68ch;
+  padding-left: 18px;
+  border-left: 3px solid var(--gold);
+}
+
+.prayer-text p {
+  max-width: none;
+  margin-bottom: 12px;
+}
+
+.prayer-text p:last-child {
+  margin-bottom: 0;
+}
+
+.note {
+  color: var(--muted);
+}
+
+.devotion-lines {
+  display: grid;
+  gap: 6px;
+  max-width: 68ch;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--red-dark);
+  font-weight: 700;
+}
+
+.source-note {
+  max-width: 68ch;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.progress {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--red-dark);
+  font-weight: 700;
+}
+
+.progress output {
+  min-width: 4ch;
+}
+
+.reset {
+  padding: 0;
+  border: 0;
+  color: var(--red-dark);
+  background: transparent;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (max-width: 760px) {
+  body {
+    font-size: 17px;
+  }
+
+  main {
+    padding: 18px 14px 42px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .hero-image {
+    max-width: 430px;
+    margin-inline: auto;
+  }
+
+  .section {
+    padding: 20px 16px;
+  }
+
+  .section-header {
+    display: block;
+  }
+
+  .checklist {
+    grid-template-columns: 1fr;
+  }
+
+  .tracker {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 12pt;
+  }
+
+  main {
+    width: 100%;
+    padding: 0;
+  }
+
+  .hero {
+    display: block;
+    min-height: 0;
+  }
+
+  .hero-image img {
+    max-width: 2.7in;
+    margin: 0 auto 8px;
+    box-shadow: none;
+  }
+
+  .quick-actions,
+  .reset {
+    display: none;
+  }
+
+  .section {
+    break-inside: avoid;
+    margin-bottom: 18px;
+    padding: 14px;
+    border-color: #bbb;
+    box-shadow: none;
+  }
+
+  .check-item {
+    break-inside: avoid;
+    background: #fff;
+  }
+
+  .month-card {
+    break-inside: avoid;
+    background: #fff;
+  }
+
+  .tracker {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+</style>
+</head>
+<body>
+<main>
+  <section class="hero" aria-labelledby="page-title">
+    <div class="hero-copy">
+      <h1 id="page-title">Sacred Heart Devotion</h1>
+      <p class="subtitle">
+        A quiet Friday guide for prayer, reparation, Holy Communion, and monthly progress in the First Friday devotion.
+      </p>
+      <p>
+        Place yourself before the loving Heart of Jesus, make a simple offering of the day, and return to this sheet as a prayer companion.
+      </p>
+      <div class="quick-actions" aria-label="Page actions">
+        <a class="button" href="#friday-checklist">Begin Friday Devotion</a>
+        <a class="button secondary" href="#first-friday">Track First Fridays</a>
+        <button class="button secondary" type="button" id="print-page">Print Sheet</button>
+      </div>
+    </div>
+    <figure class="hero-image">
+      <img src="assets/sacred-heart-jesus.png" width="1024" height="1536" alt="Sacred Heart of Jesus Christ with one hand raised in blessing">
+      <figcaption>Sacred Heart of Jesus, have mercy on us.</figcaption>
+    </figure>
+  </section>
+
+  <section class="section" id="friday-checklist" aria-labelledby="checklist-title">
+    <div class="section-header">
+      <h2 id="checklist-title">Friday Checklist</h2>
+      <p class="progress">Completed <output id="friday-progress" aria-live="polite">0/12</output></p>
+    </div>
+    <div class="checklist" data-group="friday">
+      <label class="check-item"><input type="checkbox" data-save="friday-examine"><span>Examine conscience</span></label>
+      <label class="check-item"><input type="checkbox" data-save="friday-confession"><span>Go to Confession, within eight days if possible</span></label>
+      <label class="check-item"><input type="checkbox" data-save="friday-morning-offering"><span>Morning Offering</span></label>
+      <label class="check-item"><input type="checkbox" data-save="friday-litany"><span>Pray the Sacred Heart Litany</span></label>
+      <label class="check-item"><input type="checkbox" data-save="friday-rosary"><span>Pray the Holy Rosary, at least one decade</span></label>
+      <label class="check-item"><input type="checkbox" data-save="friday-silent-prayer"><span>Silent prayer for 10 to 15 minutes</span></label>
+      <label class="check-item"><input type="checkbox" data-save="friday-mass"><span>Attend Holy Mass</span></label>
+      <label class="check-item"><input type="checkbox" data-save="friday-communion"><span>Receive Holy Communion worthily</span></label>
+      <label class="check-item"><input type="checkbox" data-save="friday-reparation"><span>Offer Communion in reparation to the Sacred Heart</span></label>
+      <label class="check-item"><input type="checkbox" data-save="friday-sacrifice"><span>Make small sacrifices</span></label>
+      <label class="check-item"><input type="checkbox" data-save="friday-charity"><span>Perform at least one act of charity</span></label>
+      <label class="check-item"><input type="checkbox" data-save="friday-act-reparation"><span>Pray the Act of Reparation in the evening</span></label>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="prayers-title">
+    <h2 id="prayers-title">Booklet Prayers</h2>
+    <div class="prayer">
+      <h3>Morning Offering</h3>
+      <div class="prayer-text">
+        <p>O Jesus, through the Immaculate Heart of Mary, I offer You my prayers, works, joys, and sufferings of this day in reparation for all offenses against Your Sacred Heart, and for the salvation of souls. Amen.</p>
+      </div>
+
+      <h3>Litany of the Sacred Heart, Short Form</h3>
+      <div class="prayer-text">
+        <p>Sacred Heart of Jesus, have mercy on us. Heart of Jesus, burning with love for us, inflame our hearts with love for You. Heart of Jesus, source of all consolation, have mercy on us. Heart of Jesus, patient and rich in mercy, have mercy on us.</p>
+      </div>
+
+      <h3>Act of Consecration to the Sacred Heart</h3>
+      <div class="prayer-text">
+        <p>Most sweet Jesus, Redeemer of the human race, look down upon us humbly prostrate before Thy altar. We are Thine, and Thine we wish to be; but, to be more surely united with Thee, behold each one of us freely consecrates himself today to Thy most Sacred Heart.</p>
+        <p>Many indeed have never known Thee; many too, despising Thy precepts, have rejected Thee. Have mercy on them all, most merciful Jesus, and draw them to Thy Sacred Heart.</p>
+        <p>Be Thou King, O Lord, not only of the faithful who have never forsaken Thee, but also of the prodigal children who have abandoned Thee; grant that they may quickly return to Thy Father's house lest they die of wretchedness and hunger.</p>
+        <p>Be Thou King of all those who are still involved in the darkness of idolatry or of Islamism, and refuse not to draw them all into the light and Kingdom of God. Turn Thine eyes of mercy toward the children of that race, once Thy chosen people. Of old they called down upon themselves the Blood of the Savior; may it now descend upon them a laver of redemption and of life.</p>
+        <p>Grant, O Lord, to Thy Church assurance of freedom and immunity from harm; give peace and order to all nations, and make the earth resound from pole to pole with one cry: "Praise to the divine Heart that wrought our salvation; to It be glory and honor forever." Amen.</p>
+      </div>
+
+      <h3>Act of Reparation</h3>
+      <div class="prayer-text">
+        <p>O sweet Jesus, Whose overflowing charity for men is requited by so much forgetfulness, negligence and contempt, behold us prostrate before Thy altar eager to repair by a special act of homage the cruel indifference and injuries, to which Thy loving Heart is everywhere subject.</p>
+        <p>Mindful alas! that we ourselves have had a share in such great indignities, which we now deplore from the depths of our hearts, we humbly ask Thy pardon and declare our readiness to atone by voluntary expiation not only for our own personal offenses, but also for the sins of those, who, straying far from the path of salvation, refuse in their obstinate infidelity to follow Thee, their Shepherd and Leader, or, renouncing the vows of their baptism, have cast off the sweet yoke of Thy Law.</p>
+        <p>We are now resolved to expiate each and every deplorable outrage committed against Thee; we are determined to make amends for the manifold offenses against Christian modesty in unbecoming dress and behavior, for all the foul seductions laid to ensnare the feet of the innocent, for the frequent violations of Sundays and holy-days, and the shocking blasphemies uttered against Thee and Thy saints.</p>
+        <p>We wish also to make amends for the insults to which Thy Vicar on earth and Thy priests are subjected, for the profanation, by conscious neglect or terrible acts of sacrilege, of the very Sacrament of Thy divine love; and lastly for the public crimes of nations who resist the rights and teaching authority of the Church which Thou hast founded.</p>
+        <p>Would, O divine Jesus, we were able to wash away such abominations with our blood. We now offer, in reparation for these violations of Thy divine honor, the satisfaction Thou didst once make to Thy eternal Father on the cross and which Thou dost continue to renew daily on our altars.</p>
+        <p>We offer it in union with the acts of atonement of Thy Virgin Mother and all the saints and of the pious faithful on earth; and we sincerely promise to make recompense, as far as we can, with the help of Thy grace, for all neglect of Thy great love and for the sins we and others have committed in the past.</p>
+        <p>Henceforth we will live a life of unwavering faith, of purity of conduct, of perfect observance of the precepts of the Gospel and especially that of charity. We promise to the best of our power to prevent others from offending Thee and to bring as many as possible to follow Thee.</p>
+        <p>O loving Jesus, through the intercession of the Blessed Virgin Mary, our model in reparation, deign to receive the voluntary offering we make of this act of expiation; and by the crowning gift of perseverance keep us faithful unto death in our duty and the allegiance we owe to Thee, so that we may one day come to that happy home, where Thou with the Father and the Holy Ghost livest and reignest God, world without end. Amen.</p>
+      </div>
+
+      <ul class="devotion-lines" aria-label="Booklet invocations">
+        <li>Sacred Heart of Jesus, have mercy on us.</li>
+        <li>Sacred Heart of Jesus, Thy Kingdom come.</li>
+        <li>Sacred Heart of Jesus, I trust in Thee.</li>
+        <li>Sorrowful and Immaculate Heart of Mary, pray for us.</li>
+      </ul>
+      <p class="source-note">Combined with prayer and tracker content from <strong>SacredHeartBooklet.pdf</strong>, credited in the booklet to The Fatima Center.</p>
+    </div>
+  </section>
+
+  <section class="section" id="first-friday" aria-labelledby="first-friday-title">
+    <div class="section-header">
+      <h2 id="first-friday-title">First Friday Devotion</h2>
+      <p class="progress">Months <output id="month-progress" aria-live="polite">0/9</output></p>
+    </div>
+    <p>
+      Our Lord revealed to <strong>St. Margaret Mary Alacoque</strong> that those who receive Holy Communion on the First Friday of nine consecutive months, in a spirit of reparation, will receive special graces, especially perseverance in grace at the end of life.
+    </p>
+
+    <h3>How to Do It Properly</h3>
+    <ul>
+      <li>Attend Holy Mass on the First Friday of each month.</li>
+      <li>Receive Holy Communion in a state of grace.</li>
+      <li>Go to Confession regularly, before or after within a reasonable time.</li>
+      <li>Offer Communion in reparation to the Sacred Heart.</li>
+      <li>Repeat for nine consecutive months without missing.</li>
+    </ul>
+
+    <h3>Tracking Your Progress</h3>
+    <div class="tracker" data-group="months">
+      <fieldset class="month-card" data-month-card>
+        <legend>Month 1</legend>
+        <label class="month-date" for="month-1-date">Date<input id="month-1-date" class="month-field" data-save-text="month-1-date" type="text"></label>
+        <div class="commitments">
+          <label class="commitment"><input type="checkbox" data-save="month-1-confession" data-month-commitment><span>Good Confession</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-1-mass" data-month-commitment><span>Holy Mass</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-1-communion" data-month-commitment><span>Communion of Reparation</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-1-acts" data-month-commitment><span>Acts of Reparation and Consecration</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="month-card" data-month-card>
+        <legend>Month 2</legend>
+        <label class="month-date" for="month-2-date">Date<input id="month-2-date" class="month-field" data-save-text="month-2-date" type="text"></label>
+        <div class="commitments">
+          <label class="commitment"><input type="checkbox" data-save="month-2-confession" data-month-commitment><span>Good Confession</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-2-mass" data-month-commitment><span>Holy Mass</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-2-communion" data-month-commitment><span>Communion of Reparation</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-2-acts" data-month-commitment><span>Acts of Reparation and Consecration</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="month-card" data-month-card>
+        <legend>Month 3</legend>
+        <label class="month-date" for="month-3-date">Date<input id="month-3-date" class="month-field" data-save-text="month-3-date" type="text"></label>
+        <div class="commitments">
+          <label class="commitment"><input type="checkbox" data-save="month-3-confession" data-month-commitment><span>Good Confession</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-3-mass" data-month-commitment><span>Holy Mass</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-3-communion" data-month-commitment><span>Communion of Reparation</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-3-acts" data-month-commitment><span>Acts of Reparation and Consecration</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="month-card" data-month-card>
+        <legend>Month 4</legend>
+        <label class="month-date" for="month-4-date">Date<input id="month-4-date" class="month-field" data-save-text="month-4-date" type="text"></label>
+        <div class="commitments">
+          <label class="commitment"><input type="checkbox" data-save="month-4-confession" data-month-commitment><span>Good Confession</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-4-mass" data-month-commitment><span>Holy Mass</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-4-communion" data-month-commitment><span>Communion of Reparation</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-4-acts" data-month-commitment><span>Acts of Reparation and Consecration</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="month-card" data-month-card>
+        <legend>Month 5</legend>
+        <label class="month-date" for="month-5-date">Date<input id="month-5-date" class="month-field" data-save-text="month-5-date" type="text"></label>
+        <div class="commitments">
+          <label class="commitment"><input type="checkbox" data-save="month-5-confession" data-month-commitment><span>Good Confession</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-5-mass" data-month-commitment><span>Holy Mass</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-5-communion" data-month-commitment><span>Communion of Reparation</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-5-acts" data-month-commitment><span>Acts of Reparation and Consecration</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="month-card" data-month-card>
+        <legend>Month 6</legend>
+        <label class="month-date" for="month-6-date">Date<input id="month-6-date" class="month-field" data-save-text="month-6-date" type="text"></label>
+        <div class="commitments">
+          <label class="commitment"><input type="checkbox" data-save="month-6-confession" data-month-commitment><span>Good Confession</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-6-mass" data-month-commitment><span>Holy Mass</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-6-communion" data-month-commitment><span>Communion of Reparation</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-6-acts" data-month-commitment><span>Acts of Reparation and Consecration</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="month-card" data-month-card>
+        <legend>Month 7</legend>
+        <label class="month-date" for="month-7-date">Date<input id="month-7-date" class="month-field" data-save-text="month-7-date" type="text"></label>
+        <div class="commitments">
+          <label class="commitment"><input type="checkbox" data-save="month-7-confession" data-month-commitment><span>Good Confession</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-7-mass" data-month-commitment><span>Holy Mass</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-7-communion" data-month-commitment><span>Communion of Reparation</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-7-acts" data-month-commitment><span>Acts of Reparation and Consecration</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="month-card" data-month-card>
+        <legend>Month 8</legend>
+        <label class="month-date" for="month-8-date">Date<input id="month-8-date" class="month-field" data-save-text="month-8-date" type="text"></label>
+        <div class="commitments">
+          <label class="commitment"><input type="checkbox" data-save="month-8-confession" data-month-commitment><span>Good Confession</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-8-mass" data-month-commitment><span>Holy Mass</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-8-communion" data-month-commitment><span>Communion of Reparation</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-8-acts" data-month-commitment><span>Acts of Reparation and Consecration</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="month-card" data-month-card>
+        <legend>Month 9</legend>
+        <label class="month-date" for="month-9-date">Date<input id="month-9-date" class="month-field" data-save-text="month-9-date" type="text"></label>
+        <div class="commitments">
+          <label class="commitment"><input type="checkbox" data-save="month-9-confession" data-month-commitment><span>Good Confession</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-9-mass" data-month-commitment><span>Holy Mass</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-9-communion" data-month-commitment><span>Communion of Reparation</span></label>
+          <label class="commitment"><input type="checkbox" data-save="month-9-acts" data-month-commitment><span>Acts of Reparation and Consecration</span></label>
+        </div>
+      </fieldset>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="reminder-title">
+    <h2 id="reminder-title">Reminder</h2>
+    <p class="prayer-text">"Behold this Heart which has so loved men."</p>
+    <p class="note">
+      Progress is saved in this browser on this device. Use the button below when you want a fresh start.
+    </p>
+    <button class="reset" type="button" id="reset-progress">Reset saved progress</button>
+  </section>
+</main>
+
+<script>
+(function () {
+  var storagePrefix = "sacred-heart-devotion:";
+  var checkboxes = Array.prototype.slice.call(document.querySelectorAll("[data-save]"));
+  var textFields = Array.prototype.slice.call(document.querySelectorAll("[data-save-text]"));
+  var monthCards = Array.prototype.slice.call(document.querySelectorAll("[data-month-card]"));
+  var fridayProgress = document.getElementById("friday-progress");
+  var monthProgress = document.getElementById("month-progress");
+  var resetButton = document.getElementById("reset-progress");
+  var printButton = document.getElementById("print-page");
+
+  function key(name) {
+    return storagePrefix + name;
+  }
+
+  function updateProgress() {
+    var friday = checkboxes.filter(function (box) {
+      return box.dataset.save.indexOf("friday-") === 0;
+    });
+    var fridayDone = friday.filter(function (box) { return box.checked; }).length;
+    var monthsDone = monthCards.filter(function (card) {
+      var commitments = Array.prototype.slice.call(card.querySelectorAll("[data-month-commitment]"));
+      return commitments.length > 0 && commitments.every(function (box) { return box.checked; });
+    }).length;
+
+    fridayProgress.value = fridayDone + "/" + friday.length;
+    fridayProgress.textContent = fridayDone + "/" + friday.length;
+    monthProgress.value = monthsDone + "/" + monthCards.length;
+    monthProgress.textContent = monthsDone + "/" + monthCards.length;
+  }
+
+  checkboxes.forEach(function (box) {
+    box.checked = localStorage.getItem(key(box.dataset.save)) === "true";
+    box.addEventListener("change", function () {
+      localStorage.setItem(key(box.dataset.save), String(box.checked));
+      updateProgress();
+    });
+  });
+
+  textFields.forEach(function (field) {
+    field.value = localStorage.getItem(key(field.dataset.saveText)) || "";
+    field.addEventListener("input", function () {
+      localStorage.setItem(key(field.dataset.saveText), field.value);
+    });
+  });
+
+  resetButton.addEventListener("click", function () {
+    checkboxes.forEach(function (box) {
+      box.checked = false;
+      localStorage.removeItem(key(box.dataset.save));
+    });
+    textFields.forEach(function (field) {
+      field.value = "";
+      localStorage.removeItem(key(field.dataset.saveText));
+    });
+    updateProgress();
+  });
+
+  printButton.addEventListener("click", function () {
+    window.print();
+  });
+
+  updateProgress();
+}());
+</script>
+</body>
+</html>
